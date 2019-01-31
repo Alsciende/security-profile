@@ -1,0 +1,21 @@
+default:
+    translation:
+        locale: en
+
+    suites:
+        default:
+            contexts:
+                - App\Features\Context\FeatureContext:
+                    kernel: '@kernel'
+                - App\Features\Context\ApiContext:
+                    client : '@test.client'
+                - App\Features\Context\JsonContext:
+                    jsonSchemaBaseUrl: 'features/json_schema/'
+                - App\Features\Context\DoctrineContext:
+                    client : '@doctrine'
+
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                bootstrap: features/bootstrap/bootstrap.php
+                class: App\Kernel
