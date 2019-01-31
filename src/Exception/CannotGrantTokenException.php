@@ -12,7 +12,7 @@ class CannotGrantTokenException extends \Exception
     {
         parent::__construct(sprintf(
             'Cannot grant role [%s] to token.',
-            $permission->getRole()
+            $permission->getId()
         ));
     }
 }

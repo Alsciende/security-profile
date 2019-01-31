@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\Permission;
-use App\Entity\UserToken;
+use App\Entity\Token;
 use App\Exception\CannotGrantTokenException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Creates UserToken instances.
+ * Creates Token instances.
  */
 class UserTokenFactory
 {
@@ -23,6 +23,8 @@ class UserTokenFactory
 
     /**
      * UserTokenFactory constructor.
+     *
+     * @param Security $security
      */
     public function __construct(Security $security)
     {
@@ -35,23 +37,23 @@ class UserTokenFactory
      * @param string       $id
      * @param Permission[] $permissions
      *
-     * @return UserToken
+     * @return Token
      *
      * @throws AccessDeniedException
      * @throws CannotGrantTokenException
      */
-    public function createToken(string $id, array $permissions): UserToken
+    public function createToken(string $id, array $permissions): Token
     {
         if (!$this->security->getUser() instanceof UserInterface) {
             throw new AccessDeniedException();
         }
 
         foreach ($permissions as $permission) {
-            if (false === $this->security->isGranted($permission->getRole())) {
+            if (false === $this->security->isGranted($permission->getId())) {
                 throw new CannotGrantTokenException($permission);
             }
         }
 
-        return new UserToken($id, $this->security->getUser(), $permissions);
+        return new Token($id, $this->security->getUser(), $permissions);
     }
 }

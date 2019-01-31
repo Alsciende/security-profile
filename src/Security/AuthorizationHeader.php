@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use Symfony\Component\HttpFoundation\HeaderBag;
@@ -20,7 +22,15 @@ class AuthorizationHeader
 
     public function __construct(HeaderBag $bag)
     {
-        $fields = explode(' ', $bag->get(self::HEADER, ''), 2);
+        $header = $bag->get(self::HEADER);
+        if (is_null($header)) {
+            throw new \Exception('Missing header ' . self::HEADER);
+        }
+        if (is_array($header)) {
+            throw new \Exception('Too many headers ' . self::HEADER);
+        }
+
+        $fields = explode(' ', $header, 2);
 
         $this->scheme = $fields[0] ?? '';
         $this->credentials = $fields[1] ?? '';

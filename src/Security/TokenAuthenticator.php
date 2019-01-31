@@ -1,9 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
-use App\Entity\UserToken;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,19 +17,9 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 {
     const SCHEME = 'Bearer';
 
-    /**
-     * @var EntityManagerInterface
-     */
-    private $em;
-
-    public function __construct(EntityManagerInterface $em)
-    {
-        $this->em = $em;
-    }
-
     public function supports(Request $request)
     {
-        return $request->headers->has(AuthorizationHeader::HEADER);
+        return true;
     }
 
     public function getCredentials(Request $request)
@@ -39,8 +29,8 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        if ($credentials instanceof AuthorizationHeader && $credentials->getScheme() === self::SCHEME) {
-            return $this->em->find(UserToken::class, $credentials->getCredentials());
+        if ($credentials instanceof AuthorizationHeader && self::SCHEME === $credentials->getScheme()) {
+            return $userProvider->loadUserByUsername($credentials->getCredentials());
         }
 
         return null;
@@ -54,7 +44,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         $data = [
-            'message' => strtr($exception->getMessageKey(), $exception->getMessageData())
+            'message' => strtr($exception->getMessageKey(), $exception->getMessageData()),
         ];
 
         return new JsonResponse($data, Response::HTTP_FORBIDDEN);
@@ -73,7 +63,7 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
     public function start(Request $request, AuthenticationException $authException = null)
     {
         $data = [
-            'message' => 'Authentication Required'
+            'message' => 'Authentication Required',
         ];
 
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);

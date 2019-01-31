@@ -269,4 +269,12 @@ class JsonContext implements Context
 
         Assertion::eq($realJsonValue, $expectedJsonValue);
     }
+
+    /**
+     * @Then /^I print the response as JSON$/
+     */
+    public function iPrintTheResponseAsJson()
+    {
+        echo $this->readJson()->encode(true);
+    }
 }

@@ -8,14 +8,21 @@ default:
                 - App\Features\Context\FeatureContext:
                     kernel: '@kernel'
                 - App\Features\Context\ApiContext:
-                    client : '@test.client'
+                    client: '@test.client'
                 - App\Features\Context\JsonContext:
                     jsonSchemaBaseUrl: 'features/json_schema/'
                 - App\Features\Context\DoctrineContext:
-                    client : '@doctrine'
+                    doctrine: '@doctrine'
 
     extensions:
         Behat\Symfony2Extension:
             kernel:
                 bootstrap: features/bootstrap/bootstrap.php
                 class: App\Kernel
+        BehatExtension\DoctrineDataFixturesExtension\Extension:
+            lifetime:    'feature'
+            directories: ~
+            fixtures:
+                # see https://github.com/BehatExtension/DoctrineDataFixturesExtension/pull/29
+                - 'App\DataFixtures\AppFixtures'
+

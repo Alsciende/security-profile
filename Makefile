@@ -14,7 +14,7 @@ security: vendor/bin ## (PHP) Check if application uses dependencies with known 
 
 stan: vendor/bin ## (PHP) Static analysis
 	@echo
-	vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/ tests/ features/Context/
+	vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/ tests/
 
 test: unit ## (PHP) Launch all test tools
 

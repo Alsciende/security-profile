@@ -9,6 +9,7 @@
         "symfony/dotenv": "4.2.*",
         "symfony/flex": "^1.1",
         "symfony/framework-bundle": "4.2.*",
+        "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
         "symfony/security-bundle": "4.2.*",
         "symfony/yaml": "4.2.*"
@@ -61,13 +62,16 @@
     },
     "require-dev": {
         "beberlei/assert": "^3.2",
+        "behat-extension/doctrine-data-fixtures-extension": "^6.0",
         "behat/behat": "^3.5",
         "behat/symfony2-extension": "^2.1",
+        "doctrine/doctrine-fixtures-bundle": "^3.1",
         "friendsofphp/php-cs-fixer": "^2.14",
         "phpstan/phpstan": "^0.11.1",
         "phpstan/phpstan-doctrine": "^0.11.0",
         "phpunit/phpunit": "^7.5",
         "symfony/browser-kit": "4.2.*",
-        "symfony/property-access": "4.2.*"
+        "symfony/property-access": "4.2.*",
+        "symfony/var-dumper": "4.2.*"
     }
 }
