@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /**
  * Created by PhpStorm.
  * User: cedric
@@ -21,24 +23,26 @@ class TestController
     /**
      * @Route(path="/view",methods={"GET"})
      * @IsGranted("ROLE_VIEW")
+     *
      * @return JsonResponse
      */
     public function view()
     {
         return new JsonResponse([
-            'success' => true
+            'success' => true,
         ]);
     }
 
     /**
      * @Route(path="/edit",methods={"GET"})
      * @IsGranted("ROLE_EDIT")
+     *
      * @return JsonResponse
      */
     public function edit()
     {
         return new JsonResponse([
-            'success' => true
+            'success' => true,
         ]);
     }
 }

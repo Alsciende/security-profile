@@ -7,7 +7,6 @@ namespace App\Service;
 use App\Entity\Permission;
 use App\Entity\Token;
 use App\Exception\CannotGrantTokenException;
-use App\UserAwareInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -54,10 +53,6 @@ class TokenFactory
             if (false === $this->security->isGranted($permission->getId())) {
                 throw new CannotGrantTokenException($permission);
             }
-        }
-
-        while ($user instanceof UserAwareInterface) {
-            $user = $user->getUser();
         }
 
         return new Token($id, $user, $permissions);

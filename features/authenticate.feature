@@ -1,7 +1,7 @@
 Feature:
   I can authenticate with a user and some roles
 
-  Scenario: I can use a token to authenticate
+  Scenario: I can get details about my user
     Given the request "Authorization" header is "Bearer full"
     When I request "/users/me"
     Then the response code is "200"
@@ -10,14 +10,15 @@ Feature:
     And the JSON node "data.username" should be equal to "test@example.com"
     And the JSON node "data.roles" should have 2 elements
 
-  Scenario: I can use a partial token to authenticate with less permissions
+  Scenario: I can get details about my token
     Given the request "Authorization" header is "Bearer partial"
-    When I request "/users/me"
+    When I request "/tokens/me"
     Then the response code is "200"
     And I load the response as JSON
     And the JSON node "success" should be equal to "true"
-    And the JSON node "data.username" should be equal to "test@example.com"
-    And the JSON node "data.roles" should have 1 element
+    And the JSON node "data.user.username" should be equal to "test@example.com"
+    And the JSON node "data.user.roles" should have 2 element
+    And the JSON node "data.token.roles" should have 1 element
 
   Scenario: I can create a token
     Given the request "Authorization" header is "Bearer full"

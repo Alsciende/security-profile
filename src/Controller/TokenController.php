@@ -13,9 +13,11 @@ namespace App\Controller;
 use App\Entity\Permission;
 use App\Service\TokenFactory;
 use Doctrine\ORM\EntityManagerInterface;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -28,13 +30,13 @@ class TokenController
      * @param Request                $request
      * @param Security               $security
      * @param EntityManagerInterface $manager
-     * @param TokenFactory           $factory
+     * @param TokenFactory           $tokenFactory
      *
      * @return JsonResponse
      *
      * @throws \App\Exception\CannotGrantTokenException
      */
-    public function post(Request $request, Security $security, EntityManagerInterface $manager, TokenFactory $factory)
+    public function post(Request $request, Security $security, EntityManagerInterface $manager, TokenFactory $tokenFactory)
     {
         $user = $security->getUser();
         if (!$user instanceof UserInterface) {
@@ -57,7 +59,7 @@ class TokenController
         }
 
         try {
-            $token = $factory->createToken('abcd', $permissions);
+            $token = $tokenFactory->createToken(Uuid::uuid4()->toString(), $permissions);
             $manager->persist($token);
             $manager->flush();
         } catch (\Exception $exception) {
@@ -72,6 +74,36 @@ class TokenController
             'data' => [
                 'id' => $token->getId(),
                 'roles' => $token->getRoles(),
+            ],
+        ]);
+    }
+
+    /**
+     * @Route(path="/tokens/me",methods={"GET"})
+     *
+     * @param Security $security
+     *
+     * @return JsonResponse
+     */
+    public function me(Security $security)
+    {
+        $token = $security->getToken();
+        $user = $security->getUser();
+
+        if (!$token instanceof TokenInterface || !$user instanceof UserInterface) {
+            throw new AccessDeniedException();
+        }
+
+        return new JsonResponse([
+            'success' => true,
+            'data' => [
+                'user' => [
+                    'username' => $user->getUsername(),
+                    'roles' => $user->getRoles(),
+                ],
+                'token' => [
+                    'roles' => $token->getRoles(),
+                ],
             ],
         ]);
     }

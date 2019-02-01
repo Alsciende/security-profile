@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
+use App\Entity\Token;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,9 +12,11 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Guard\AuthenticatorInterface;
+use Symfony\Component\Security\Guard\Token\GuardTokenInterface;
+use Symfony\Component\Security\Guard\Token\PostAuthenticationGuardToken;
 
-class TokenAuthenticator extends AbstractGuardAuthenticator
+class TokenAuthenticator implements AuthenticatorInterface
 {
     const SCHEME = 'Bearer';
 
@@ -69,5 +72,20 @@ class TokenAuthenticator extends AbstractGuardAuthenticator
         ];
 
         return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @param Token  $token
+     * @param string $providerKey
+     *
+     * @return GuardTokenInterface|PostAuthenticationGuardToken
+     */
+    public function createAuthenticatedToken(UserInterface $token, $providerKey)
+    {
+        return new PostAuthenticationGuardToken(
+            $token->getUser(),
+            $providerKey,
+            $token->getRoles()
+        );
     }
 }
