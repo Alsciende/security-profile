@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\GetRolesTrait;
+use App\UserAwareInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -17,7 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity()
  * @ORM\Table(name="tokens")
  */
-class Token implements UserInterface
+class Token implements UserInterface, UserAwareInterface
 {
     use GetRolesTrait;
 
@@ -59,9 +60,15 @@ class Token implements UserInterface
         $this->id = $id;
         $this->user = $user;
 
+        $this->clearPermissions();
         foreach ($permissions as $permission) {
             $this->addPermission($permission);
         }
+    }
+
+    public function clearPermissions()
+    {
+        $this->permissions = new ArrayCollection();
     }
 
     public function addPermission(Permission $permission)

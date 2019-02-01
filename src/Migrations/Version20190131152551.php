@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190131135810 extends AbstractMigration
+final class Version20190131152551 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -30,9 +30,9 @@ final class Version20190131135810 extends AbstractMigration
         $this->addSql('CREATE TABLE users (id VARCHAR(255) NOT NULL, profile_id VARCHAR(255) DEFAULT NULL, username VARCHAR(255) NOT NULL, password VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_1483A5E9CCFA12B8 ON users (profile_id)');
         $this->addSql('CREATE TABLE profiles (id VARCHAR(255) NOT NULL, label VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE profile_permission (profile_id VARCHAR(255) NOT NULL, permission_id VARCHAR(255) NOT NULL, PRIMARY KEY(profile_id, permission_id))');
-        $this->addSql('CREATE INDEX IDX_2722A5F7CCFA12B8 ON profile_permission (profile_id)');
-        $this->addSql('CREATE INDEX IDX_2722A5F7FED90CCA ON profile_permission (permission_id)');
+        $this->addSql('CREATE TABLE profile_permissions (profile_id VARCHAR(255) NOT NULL, permission_id VARCHAR(255) NOT NULL, PRIMARY KEY(profile_id, permission_id))');
+        $this->addSql('CREATE INDEX IDX_38F08A11CCFA12B8 ON profile_permissions (profile_id)');
+        $this->addSql('CREATE INDEX IDX_38F08A11FED90CCA ON profile_permissions (permission_id)');
         $this->addSql('CREATE TABLE permissions (id VARCHAR(255) NOT NULL, label VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
     }
 
@@ -45,7 +45,7 @@ final class Version20190131135810 extends AbstractMigration
         $this->addSql('DROP TABLE token_permissions');
         $this->addSql('DROP TABLE users');
         $this->addSql('DROP TABLE profiles');
-        $this->addSql('DROP TABLE profile_permission');
+        $this->addSql('DROP TABLE profile_permissions');
         $this->addSql('DROP TABLE permissions');
     }
 }

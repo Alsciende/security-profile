@@ -2,9 +2,6 @@
     "beberlei/assert": {
         "version": "v3.2.0"
     },
-    "behat-extension/doctrine-data-fixtures-extension": {
-        "version": "v6.0.0"
-    },
     "behat/behat": {
         "version": "v3.5.0"
     },
@@ -260,6 +257,15 @@
     "sebastian/version": {
         "version": "2.0.1"
     },
+    "sensio/framework-extra-bundle": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
+        }
+    },
     "symfony/browser-kit": {
         "version": "v4.2.2"
     },
@@ -412,6 +418,15 @@
     },
     "symfony/var-exporter": {
         "version": "v4.2.2"
+    },
+    "symfony/web-server-bundle": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "dae9b39fd6717970be7601101ce5aa960bf53d9a"
+        }
     },
     "symfony/yaml": {
         "version": "v4.2.2"

@@ -38,7 +38,7 @@ class Profile
      * @var Permission[]|ArrayCollection
      *
      * @ORM\ManyToMany(targetEntity="Permission", inversedBy="profiles")
-     * @ORM\JoinTable(name="profile_permission",
+     * @ORM\JoinTable(name="profile_permissions",
      *     joinColumns={@ORM\JoinColumn(name="profile_id", referencedColumnName="id")},
      *     inverseJoinColumns={@ORM\JoinColumn(name="permission_id", referencedColumnName="id")}
      *     )

@@ -22,9 +22,12 @@ unit: vendor/bin ## (PHP) Unit tests
 	@echo
 	vendor/bin/phpunit
 
-behat: vendor/bin ## (PHP) Integration tests
+behat: vendor/bin fixtures ## (PHP) Integration tests
 	@echo
 	vendor/bin/behat
+
+fixtures: vendor/bin
+	bin/console doctrine:fixtures:load -n
 
 vendor/bin:
 	@echo

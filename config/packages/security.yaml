@@ -11,9 +11,11 @@ security:
         main:
             anonymous: ~
             logout: ~
+            provider: token_provider
             guard:
                 authenticators:
                     - App\Security\TokenAuthenticator
+            access_denied_handler: App\Security\AccessDeniedHandler
 
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }

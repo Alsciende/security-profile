@@ -1,2 +1,2 @@
-includes:
+    includes:
     - ./vendor/phpstan/phpstan-doctrine/extension.neon

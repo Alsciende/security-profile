@@ -29,16 +29,18 @@ class AppFixtures extends Fixture
         $user = new User('test');
         $user->setUsername('test@example.com');
         $user->setPassword('');
-        $user->setProfile($profileVisitor);
+        $user->setProfile($profileEditor);
 
-        $token = new Token('123', $user, $user->getProfile()->getPermissions());
+        $tokenFull = new Token('full', $user, $user->getProfile()->getPermissions());
+        $tokenPartial = new Token('partial', $user, [$permissionView]);
 
         $manager->persist($permissionView);
         $manager->persist($permissionEdit);
         $manager->persist($profileVisitor);
         $manager->persist($profileEditor);
         $manager->persist($user);
-        $manager->persist($token);
+        $manager->persist($tokenFull);
+        $manager->persist($tokenPartial);
 
         $manager->flush();
     }
