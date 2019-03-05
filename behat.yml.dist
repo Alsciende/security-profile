@@ -5,14 +5,12 @@ default:
     suites:
         default:
             contexts:
-                - App\Features\Context\FeatureContext:
-                    kernel: '@kernel'
-                - App\Features\Context\ApiContext:
-                    client: '@test.client'
-                - App\Features\Context\JsonContext:
-                    jsonSchemaBaseUrl: 'features/json_schema/'
-                - App\Features\Context\DoctrineContext:
-                    doctrine: '@doctrine'
+                - Alsciende\Behat\ApiContext:
+                      cache: '@cache.app'
+                      client: '@test.client'
+                - Alsciende\Behat\JsonContext:
+                      cache: '@cache.app'
+                      jsonSchemaBaseUrl: 'features/json_schema/'
 
     extensions:
         Behat\Symfony2Extension:

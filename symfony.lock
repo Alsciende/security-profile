@@ -1,4 +1,7 @@
 {
+    "alsciende/behat-json-api-context": {
+        "version": "dev-master"
+    },
     "beberlei/assert": {
         "version": "v3.2.0"
     },
@@ -15,7 +18,14 @@
             "branch": "master",
             "version": "2.1",
             "ref": "ff944fc5f8dc1d1c9602968c2c12646c557adbbc"
-        }
+        },
+        "files": [
+            "behat.yml.dist",
+            "config/bootstrap.php",
+            "features/bootstrap/FeatureContext.php",
+            "features/bootstrap/bootstrap.php",
+            "features/demo.feature"
+        ]
     },
     "behat/transliterator": {
         "version": "v1.2.0"
@@ -121,6 +131,9 @@
     },
     "jean85/pretty-package-versions": {
         "version": "1.2"
+    },
+    "justinrainbow/json-schema": {
+        "version": "5.2.8"
     },
     "monolog/monolog": {
         "version": "1.24.0"
@@ -343,6 +356,9 @@
     },
     "symfony/inflector": {
         "version": "v4.2.2"
+    },
+    "symfony/lock": {
+        "version": "v4.2.4"
     },
     "symfony/monolog-bridge": {
         "version": "v4.2.2"

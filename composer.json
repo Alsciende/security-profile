@@ -30,8 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Tests\\": "tests/",
-            "App\\Features\\": "features/"
+            "App\\Tests\\": "tests/"
         }
     },
     "replace": {
@@ -64,6 +63,7 @@
         }
     },
     "require-dev": {
+        "alsciende/behat-json-api-context": "dev-master",
         "beberlei/assert": "^3.2",
         "behat/behat": "^3.5",
         "behat/symfony2-extension": "^2.1",
@@ -72,8 +72,12 @@
         "phpstan/phpstan": "^0.11.1",
         "phpstan/phpstan-doctrine": "^0.11.0",
         "phpunit/phpunit": "^7.5",
-        "symfony/browser-kit": "4.2.*",
-        "symfony/property-access": "4.2.*",
         "symfony/var-dumper": "4.2.*"
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../behat-json-api-context"
+        }
+    ]
 }
