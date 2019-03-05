@@ -29,6 +29,11 @@ behat: vendor/bin fixtures ## (PHP) Integration tests
 fixtures: vendor/bin
 	bin/console doctrine:fixtures:load -n
 
+database: vendor/bin
+	@echo
+	bin/console doctrine:database:create
+	bin/console doctrine:schema:create
+
 vendor/bin:
 	@echo
 	composer install
