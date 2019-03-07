@@ -72,7 +72,7 @@ class Token implements UserInterface
 
     public function addPermission(Permission $permission)
     {
-        $this->permissions[] = $permission;
+        $this->permissions->add($permission);
     }
 
     public function getId(): string

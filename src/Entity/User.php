@@ -56,6 +56,7 @@ class User implements UserInterface
     public function __construct(string $id)
     {
         $this->id = $id;
+        $this->tokens = new ArrayCollection();
     }
 
     /**

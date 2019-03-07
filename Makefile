@@ -16,7 +16,7 @@ stan: vendor/bin ## (PHP) Static analysis
 	@echo
 	vendor/bin/phpstan analyse -c phpstan.neon -l 7 src/ tests/
 
-test: unit ## (PHP) Launch all test tools
+test: unit behat ## (PHP) Launch all test tools
 
 unit: vendor/bin ## (PHP) Unit tests
 	@echo

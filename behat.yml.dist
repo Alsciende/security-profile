@@ -5,13 +5,10 @@ default:
     suites:
         default:
             contexts:
+                - Alsciende\Behat\DataStoreContext
                 - Alsciende\Behat\ApiContext:
-                      cache: '@cache.app'
                       client: '@test.client'
-                - Alsciende\Behat\JsonContext:
-                      cache: '@cache.app'
-                      jsonSchemaBaseUrl: 'features/json_schema/'
-
+                - Alsciende\Behat\JsonContext
     extensions:
         Behat\Symfony2Extension:
             kernel:

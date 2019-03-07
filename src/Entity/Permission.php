@@ -57,6 +57,8 @@ class Permission
         Assert::that($id)->startsWith('ROLE_');
         $this->id = $id;
         $this->label = $label;
+        $this->profiles = new ArrayCollection();
+        $this->tokens = new ArrayCollection();
     }
 
     public function getId(): string

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "971aa4047456ce2502ed0a4901594bab",
+    "content-hash": "aa55ec7b1549da3ff49a8e1e9dbab117",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3948,18 +3948,24 @@
     "packages-dev": [
         {
             "name": "alsciende/behat-json-api-context",
-            "version": "dev-master",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Alsciende/behat-json-api-context.git",
+                "reference": "03741f341aaa0e27d03a5812dd6a7a6eab0fa7f8"
+            },
             "dist": {
-                "type": "path",
-                "url": "../behat-json-api-context",
-                "reference": "0f98d2f7cdb2c46949fc079b18807c6e9d9291e8"
+                "type": "zip",
+                "url": "https://api.github.com/repos/Alsciende/behat-json-api-context/zipball/03741f341aaa0e27d03a5812dd6a7a6eab0fa7f8",
+                "reference": "03741f341aaa0e27d03a5812dd6a7a6eab0fa7f8",
+                "shasum": ""
             },
             "require": {
                 "beberlei/assert": "^3.2",
                 "behat/behat": "^3.5",
+                "ext-json": "*",
                 "justinrainbow/json-schema": "^5.2",
                 "symfony/browser-kit": "^4.2",
-                "symfony/cache": "^4.2",
                 "symfony/http-kernel": "^4.2",
                 "symfony/lock": "^4.2",
                 "symfony/process": "^4.2",
@@ -3977,11 +3983,7 @@
                     "Alsciende\\Behat\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3991,7 +3993,8 @@
                     "email": "alsciende@icloud.com"
                 }
             ],
-            "description": "Behat context to test your JSON API"
+            "description": "Behat context to test your JSON API",
+            "time": "2019-03-07T21:57:04+00:00"
         },
         {
             "name": "beberlei/assert",
@@ -7362,9 +7365,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "alsciende/behat-json-api-context": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

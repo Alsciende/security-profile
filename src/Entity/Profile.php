@@ -60,6 +60,8 @@ class Profile
     public function __construct(string $id)
     {
         $this->id = $id;
+        $this->permissions = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): string
@@ -105,7 +107,7 @@ class Profile
 
     public function addPermission(Permission $permission)
     {
-        $this->permissions[] = $permission;
+        $this->permissions->add($permission);
     }
 
     /**
